@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-30 -33 60 60" fill="none">
+  <!-- The house mark, simplified for 16px: one ring per bow, heavier strokes. -->
+  <style>
+    .k { stroke: #1C1A17; fill: none; }
+    .b { fill: #1C1A17; stroke: none; }
+    @media (prefers-color-scheme: dark) {
+      .k { stroke: #EAE6DC; }
+      .b { fill: #EAE6DC; }
+    }
+  </style>
+  <g transform="rotate(-45) translate(0 -7)">
+    <circle class="k" cx="0" cy="-19" r="8" stroke-width="5.5"/>
+    <path class="k" d="M0 -11V27" stroke-width="5.5"/>
+    <path class="b" d="M2 13h11v12h-11z"/>
+  </g>
+  <g transform="rotate(45) translate(0 -7)">
+    <circle class="k" cx="0" cy="-19" r="8" stroke-width="5.5"/>
+    <path class="k" d="M0 -11V27" stroke-width="5.5"/>
+    <path class="b" d="M-2 13h-11v12h11z"/>
+  </g>
+</svg>

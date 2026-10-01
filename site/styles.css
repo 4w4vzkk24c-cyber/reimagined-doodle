@@ -1,0 +1,273 @@
+/* Crossed Keys Co. A title page and its verso. Two inks, the Fell types. */
+
+@font-face {
+  font-family: "Fell French Canon";
+  src: url("fonts/fell-french-canon.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Fell Pica";
+  src: url("fonts/fell-dw-pica.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Fell Pica";
+  font-style: italic;
+  src: url("fonts/fell-dw-pica-italic.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Fell Pica SC";
+  src: url("fonts/fell-dw-pica-sc.woff2") format("woff2");
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light dark;
+  --paper: #F3F0E9;
+  --ink: #1C1A17;
+  --quiet: #5F5A52;
+  --rule: #D5D0C5;
+
+  --display: "Fell French Canon", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --text: "Fell Pica", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --caps: "Fell Pica SC", "Fell Pica", "Iowan Old Style", Georgia, serif;
+
+  /* One scale. Rank comes from these steps, never from weight or colour. */
+  --size-small: 0.9375rem;
+  --size-text: 1.1875rem;
+  --size-entry: 1.5rem;
+  /* Bounded by width and height as well as text size, so enlarged text never overflows. */
+  --size-title: clamp(min(2.5rem, 11.5vw), min(1.15rem + 6.1vw, 10.5vh, 13vw), 5.5rem);
+
+  --margin: clamp(1.5rem, 6vw, 4rem);
+  /* How much of the verso shows under the title page: its rule and first heading. */
+  --peek: 6.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #181715;
+    --ink: #EAE6DC;
+    --quiet: #A29D92;
+    --rule: #36332E;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  background: var(--paper);
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--text);
+  font-size: var(--size-text);
+  line-height: 1.5;
+  font-synthesis: none;
+  overflow-wrap: break-word;
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+  font-weight: 400;
+}
+
+a {
+  color: inherit;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.17em;
+  touch-action: manipulation;
+}
+a:hover,
+a:active {
+  text-decoration-thickness: 2px;
+}
+a:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+  border-radius: 1px;
+}
+
+/* Recto: the title page. */
+
+.recto {
+  min-height: calc(100vh - var(--peek));
+  min-height: calc(100svh - var(--peek));
+  display: grid;
+  grid-template-rows: 1fr auto;
+  justify-items: center;
+  padding: var(--margin) var(--margin) clamp(2rem, 5vh, 3.25rem);
+  text-align: center;
+}
+
+.title {
+  align-self: center;
+  max-width: 12.5em;
+  padding-block: 1.5rem;
+  font-family: var(--display);
+  font-size: var(--size-title);
+  line-height: 1.07;
+  text-wrap: balance;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.imprint {
+  display: grid;
+  justify-items: center;
+}
+
+.mark {
+  display: block;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-bottom: 0.85rem;
+  color: var(--ink);
+}
+.mark .under {
+  stroke: var(--paper);
+}
+
+.house {
+  font-family: var(--caps);
+  font-size: 1.0625rem;
+  letter-spacing: 0.14em;
+  /* Tracking adds a trailing space; pull the line back onto the axis. */
+  margin-inline-end: -0.14em;
+  line-height: 1.3;
+}
+
+.place {
+  font-size: var(--size-small);
+  color: var(--quiet);
+  line-height: 1.5;
+}
+
+/* Verso: the small print. */
+
+.verso {
+  border-top: 1px solid var(--rule);
+  padding: 3rem var(--margin) clamp(2.5rem, 6vh, 4rem);
+}
+
+.column {
+  max-width: 31rem;
+  margin-inline: auto;
+}
+
+.verso h2 {
+  font-family: var(--caps);
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  line-height: 1.3;
+  margin-bottom: 0.7rem;
+}
+
+.entry {
+  margin-bottom: 3.25rem;
+}
+.entry h3 {
+  font-size: var(--size-entry);
+  line-height: 1.25;
+  margin-bottom: 0.35rem;
+}
+.entry p {
+  text-wrap: pretty;
+}
+.entry p + p {
+  margin-top: 0.35rem;
+}
+.status {
+  font-style: italic;
+  color: var(--quiet);
+}
+
+.address {
+  margin-bottom: 4.5rem;
+  overflow-wrap: anywhere;
+}
+/* A 44px target without moving the line. */
+.address a {
+  display: inline-block;
+  padding-block: 0.65rem;
+  margin-block: -0.65rem;
+}
+
+.small-print {
+  border-top: 1px solid var(--rule);
+  padding-top: 1.1rem;
+  font-size: var(--size-small);
+  line-height: 1.55;
+  color: var(--quiet);
+}
+
+/* The missing page. */
+
+/* Nothing follows this page, so it takes the whole screen. */
+.missing .recto {
+  min-height: 100vh;
+  min-height: 100svh;
+}
+.missing .title {
+  max-width: 11em;
+}
+.missing .place a {
+  display: inline-block;
+  padding-block: 0.7rem;
+  margin-block: -0.7rem;
+}
+
+/* A visitor who asks for more contrast gets one ink and firmer rules. */
+@media (prefers-contrast: more) {
+  :root {
+    --quiet: var(--ink);
+    --rule: var(--ink);
+  }
+}
+
+/* Forced colours replace both inks; the gap where the keys cross must follow. */
+@media (forced-colors: active) {
+  .mark {
+    color: CanvasText;
+  }
+  .mark .under {
+    stroke: Canvas;
+  }
+}
+
+/* Print is black on white whatever the device setting, and the pages run on. */
+@media print {
+  :root {
+    --paper: #fff;
+    --ink: #000;
+    --quiet: #333;
+    --rule: #999;
+  }
+  .recto {
+    min-height: auto;
+    padding-bottom: 3rem;
+  }
+  a {
+    text-decoration: none;
+  }
+}
