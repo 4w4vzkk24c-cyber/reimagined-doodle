@@ -157,10 +157,16 @@ a:focus-visible {
   line-height: 1.3;
 }
 
+/* The maker's line: full ink, the smallest type on the page. */
 .place {
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  margin-top: 0.1rem;
+}
+.missing .place {
   font-size: var(--size-small);
   color: var(--quiet);
-  line-height: 1.5;
+  margin-top: 0;
 }
 
 /* Verso: the small print. */
